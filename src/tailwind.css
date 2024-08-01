@@ -1,4 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.head{
+    @apply text-xl mb-2 text-center font-semibold
+}

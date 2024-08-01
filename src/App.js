@@ -78,7 +78,7 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const tasksPerPage = 2;
+  const tasksPerPage = 3;
   const lastIndex = currentPage * tasksPerPage;
   const firstIndex = lastIndex - tasksPerPage;
   const currentTasks = tasksAfterFilter.slice(firstIndex, lastIndex);
@@ -98,39 +98,39 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl text-center mt-5 mb-5">Task Management App</h1>
-      <div className="mb-4 p-4 border border-gray-300 rounded-lg">
+    <div className="container m-auto mt-4 p-4 bg-slate-200 rounded-3xl">
+      <h1 className="text-3xl text-center mb-5 font-bold">Task Management App</h1>
+      <div className="mb-4 p-4 border border-black rounded-lg">
         {isEditing ? (
-          <h2 className="text-xl mb-2 text-center">Edit Task</h2>
+          <h2 className="head">Edit Task</h2>
         ) : (
-          <h2 className="text-xl mb-2 text-center">Add Task</h2>
+          <h2 className="head">Add Task</h2>
         )}
         <input
           type="text"
           placeholder="Please enter the name of the task"
           value={name}
           onChange={(e) => dispatch(setName(e.target.value))}
-          className="mb-2 p-2 border border-gray-300 rounded w-full"
+          className="mb-2 p-2 border border-black rounded w-full"          
         />
         <input
           type="text"
           placeholder="Please enter the description of the task"
           value={description}
           onChange={(e) => dispatch(setDescription(e.target.value))}
-          className="mb-2 p-2 border border-gray-300 rounded w-full"
+          className="mb-2 p-2 border border-black rounded w-full"
         />
         <input
           type="date"
           placeholder="Please enter the deadline of the task"
           value={deadline}
           onChange={(e) => dispatch(setDeadline(e.target.value))}
-          className="mb-2 p-2 border border-gray-300 rounded w-full"
+          className="mb-2 p-2 border border-black rounded w-full"
         />
         <select
           value={status}
           onChange={(e) => dispatch(setStatus(e.target.value))}
-          className="mb-2 p-2 border border-gray-300 rounded w-full"
+          className="mb-2 p-2 border border-black rounded w-full"
         >
           <option value="">Select the status</option>
           <option value="In Progress">In Progress</option>
@@ -153,12 +153,12 @@ function App() {
       </div>
       {tasks.length > 0 && (
         <>
-          <div className="mb-4 p-4 border border-gray-300 rounded-lg">
+          <div className="mb-4 p-4 border border-black rounded-lg">
             <input
               placeholder="Enter search value"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="mb-2 p-2 border border-gray-300 rounded w-full"
+              className="mb-2 p-2 border border-black rounded w-full"
             />
             <button
               onClick={() => setSearch("")}
@@ -169,7 +169,7 @@ function App() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="mb-2 p-2 border border-gray-300 rounded w-full"
+              className="mb-2 p-2 border border-black rounded w-full"
             >
               <option value="">Select Filter status</option>
               <option value="In Progress">In Progress</option>
@@ -186,15 +186,15 @@ function App() {
         </>
       )}
       {tasks.length > 0 && currentTasks.length === 0 && (
-        <div className="text-center text-red-500">No results</div>
+        <div className="text-center font-bold text-orange-900">No Results</div>
       )}
       {currentTasks.length > 0 && (
         <>
-          <div className="grid grid-cols-1 gap-4">
+          <div className="flex flex-row justify-center text-center border border-black rounded-lg">
             {currentTasks.map((task) => {
-              const realIndex = tasks.indexOf(task);
+              const realIndex = tasks.indexOf(task);              
               return (
-                <Task
+                <Task                
                   task={task}
                   startEdit={startEdit}
                   dilete={dilete}
@@ -203,11 +203,11 @@ function App() {
               );
             })}
           </div>
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-center space-x-10 mt-4 ">
             <button
               onClick={handlePrevious}
               disabled={currentPage === 1}
-              className="bg-blue-500 text-white p-2 rounded"
+              className="bg-blue-500 text-white px-6 rounded"
             >
               Previous
             </button>
@@ -215,10 +215,10 @@ function App() {
               <button
                 key={index}
                 onClick={() => paginate(index + 1)}
-                className={`p-2 rounded ${
+                className={`p-2 rounded hover:bg-green-600 ${
                   currentPage === index + 1
                     ? "bg-blue-500 text-white"
-                    : "bg-gray-300"
+                    : "bg-gray-300 text-white"
                 }`}
               >
                 {index + 1}
@@ -227,7 +227,7 @@ function App() {
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="bg-blue-500 text-white p-2 rounded"
+              className="bg-blue-500 text-white px-6 rounded"
             >
               Next
             </button>
