@@ -8,8 +8,8 @@ import {
   setDescription,
   setStatus,
 } from "./state/countSlice";
-import { useState } from "react";
-import { Task } from "./Task";
+import { useState, useEffect } from "react";
+import { Task } from "./Task"; 
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ function App() {
 
   const update = () => {
     const newTask = { name, description, deadline, status };
-    dispatch(updateTask({ index: editIndex, newTask }));
+    dispatch(updateTask({ editIndex, newTask }));
     resetForm();
   };
 
@@ -78,7 +78,7 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const tasksPerPage = 3;
+  const tasksPerPage = 2;
   const lastIndex = currentPage * tasksPerPage;
   const firstIndex = lastIndex - tasksPerPage;
   const currentTasks = tasksAfterFilter.slice(firstIndex, lastIndex);
@@ -96,6 +96,10 @@ function App() {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  useEffect(() => {
+    setCurrentPage(1); 
+  }, [filterStatus, search]);
 
   return (
     <div className="container m-auto mt-4 p-4 bg-slate-200 rounded-3xl">
